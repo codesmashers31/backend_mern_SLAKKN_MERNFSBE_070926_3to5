@@ -9,7 +9,7 @@ import Toggle from '../pages/Toggle'
 const AppRoute = () => {
   return (
     <>
-    {/* <Navbar/> */}
+    <Navbar/>
     <Routes>
      
      <Route path='/' element={<ArrayUp/>}/>

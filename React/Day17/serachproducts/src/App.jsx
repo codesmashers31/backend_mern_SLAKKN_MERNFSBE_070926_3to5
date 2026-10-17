@@ -1,120 +1,136 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
 
-function App() {
-  const [count, setCount] = useState(0)
+
+const App = () => {
+
+  const [data,setData] = useState([])
+  const [search,setSerach] = useState("")
+  const [city,setCity] = useState("")
+  const [sort,setSort] = useState("")
+  const getData = async()=>{
+
+    const datas = await fetch("https://dummyjson.com/users")
+
+    const userList = await datas.json()
+
+    //console.log(userList.users);
+    setData(userList.users)
+
+  }
+
+  useEffect(()=>{
+    getData()
+  },[])
+
+  const handleSearch = (e)=>{
+
+     setSerach(e.target.value)
+
+  }
+
+  let Products = [...data]
+
+  if(search) {
+
+    Products = Products.filter((e)=>e.firstName.toLowerCase().includes(search.toLowerCase()))
+
+  }
+
+  const getCitis = data.map((e)=>e.address.city)
+
+  console.log(getCitis);
+
+  const duplicate = [...new Set(getCitis)]
+  
+  console.log(duplicate);
+  
+
+  const handleCity = (e)=>{
+
+    setCity(e.target.value)
+
+    console.log(city);
+    
+
+  }
+
+
+
+  if(city){
+
+    Products = Products.filter((e,i)=>e.address.city == city)
+
+    
+    
+
+  }
+
+const handlesort = (e)=>{
+
+  setSort(e.target.value)
+
+}
+
+
+if (sort == "low"){
+
+  Products = Products.sort((a,b)=>a.age-b.age)
+
+}
+
+if(sort=="high"){
+
+  Products = Products.sort((a,b)=>b.age-a.age)
+
+}
+
+
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="bg-amber-200 h-screen p-10">
 
-      <div className="ticks"></div>
+       <div className="bg-green-300 p-2 h-20 ">
+          <label htmlFor="serach">Search</label>
+          <input type="text"  id="serach" onChange={handleSearch} className="bg-white border h-10 mx-4 my-3 rounded w-60" />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+           <label htmlFor="city">Choose city</label>
+          <select value={city} id="city" onChange={handleCity} className="bg-white border h-10 mx-4 my-3 rounded w-60">
+           <option>Select City..</option> 
+           
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+           {duplicate.map((e,i)=>(
+
+              <option key={i+1} value={e}>{e}</option>
+
+           ))}
+     
+          </select> 
+
+
+          <label htmlFor="sort">Choose Sort</label>
+          <select value={sort} id="sort" onChange={handlesort} className="bg-white border h-10 mx-4 my-3 rounded w-80">
+           <option>Select One..</option> 
+           <option value="low">Low</option>
+           <option value="high">High</option>
+          </select> 
+      </div>
+      
+     
+       
+      <div className="bg-black p-5 h-200 rounded flex justify-center items-center gap-5 flex-wrap">
+        {Products.map((e)=>(
+
+          <div key={e.id} className="bg-white w-50 p-2 rounded">
+             <h3>{e.firstName}</h3>
+             <p>{e.age}</p>
+             <p>{e.address.city}</p>
+             <button className="bg-black text-white p-1 w-45 rounded my-2">Details</button>
+          </div>
+
+        ))}
+      </div>
+    </div>
     </>
   )
 }

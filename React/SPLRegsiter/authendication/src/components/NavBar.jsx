@@ -1,21 +1,9 @@
-import { Link } from "react-router-dom"
-
-
-const NavBar = () => {
-  return (
-    <>
-    <div className="bg-amber-200  p-2 flex justify-between items-center">
-        <div className="mx-15">
-            Logo
-        </div>
-        <div className="mx-15 flex gap-15">
-            <Link to={"/home"}>Home</Link>
-            <Link to={"/"}>Regsiter</Link>
-            <Link to={"/login"}>Login</Link>
-        </div>
-    </div>
-    </>
-  )
+import {useState} from 'react'
+import {Link, NavLink, useNavigate} from 'react-router-dom'
+import Brand from './Brand'
+import Icon from './Icon'
+export default function NavBar({user}){
+ const [open,setOpen]=useState(false), navigate=useNavigate()
+ function logout(){localStorage.removeItem('isActive');navigate('/login',{replace:true})}
+ return <aside className="z-30 flex flex-col border-r border-stone-200/70 bg-white lg:fixed lg:inset-y-0 lg:left-0 lg:w-64"><div className="flex items-center justify-between px-7 py-7"><Link to="/home" aria-label="Orbit home"><Brand/></Link><button className="rounded-lg p-2 hover:bg-violet-50 lg:hidden" onClick={()=>setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}><Icon name="menu"/></button></div><div className={`${open?'flex':'hidden'} flex-1 flex-col px-4 pb-5 lg:flex`}><p className="eyebrow mb-3 mt-5 px-4 text-stone-400">WORKSPACE</p><nav className="space-y-1">{[['/home','home','Overview'],['/profile','user','My profile']].map(([to,icon,label])=><NavLink key={to} to={to} onClick={()=>setOpen(false)} className={({isActive})=>`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${isActive?'bg-violet-50 text-violet-700':'text-stone-500 hover:bg-stone-50 hover:text-stone-900'}`}><Icon name={icon}/>{label}</NavLink>)}</nav><div className="mt-auto pt-16"><div className="mb-5 rounded-2xl bg-violet-50 p-4"><span className="text-2xl text-violet-600">?</span><h3 className="mt-2 text-sm font-semibold">Make yourself at home.</h3><p className="mt-2 text-xs leading-5 text-stone-500">Your space for new ideas and everyday possibilities.</p></div><Link to="/profile" onClick={()=>setOpen(false)} className="flex items-center gap-3 border-t border-stone-100 px-2 py-4"><span className="avatar size-10 text-sm">{user.name?.charAt(0).toUpperCase()}</span><span className="min-w-0"><strong className="block truncate text-xs">{user.name}</strong><span className="mt-1 block max-w-36 truncate text-[11px] text-stone-400">{user.email}</span></span></Link><button onClick={logout} className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-xs font-medium text-stone-500 hover:bg-red-50 hover:text-red-600"><Icon name="logout" className="size-4"/>Log out</button></div></div></aside>
 }
-
-export default NavBar

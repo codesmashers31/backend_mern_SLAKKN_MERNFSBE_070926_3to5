@@ -1,45 +1,8 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-
-
-const Home = () => {
-  const [datas,setDatas] = useState({})
-  const navigate = useNavigate()
-  const getdata = ()=>{
-
-    const takeData = JSON.parse(localStorage.getItem("isActiveuser"))
-    
-    if(!takeData) {
-      alert("Please Login Or regsiter")
-      navigate("/login")
-      return
-    }
-
-    setDatas(takeData)
-
-    // console.log(datas);
-    
-
-    // const {id,name,email} = datas
-
-
-  }
-
-  useEffect(()=>{
-
-    getdata()
-  },[])
-  return (
-    <>
-    <div className="bg-gray-300 flex justify-center items-center p-10 h-100">
-      <div>
-        <h1>{datas.id}</h1>
-        <h2>{datas.name}</h2>
-        <p>{datas.email}</p>
-      </div>
-    </div>
-    </>
-  )
+import {useState} from 'react'
+import {Link, useOutletContext} from 'react-router-dom'
+import Icon from '../components/Icon'
+export default function Home(){
+ const {user}=useOutletContext()
+ const [today]=useState(()=>new Date())
+ return <><div className="mb-8 flex flex-wrap items-end justify-between gap-4"><div><span className="eyebrow text-violet-600">A LITTLE SPACE. ENDLESS POSSIBILITIES.</span><h1 className="mt-3 text-3xl font-semibold tracking-tight">Hello, {user.name?.split(' ')[0] || 'friend'} <span className="text-violet-500">?</span></h1><p className="mt-2 text-sm leading-6 text-stone-500">Welcome to your corner of Orbit. Let?s make today a good one.</p></div><span className="rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs text-stone-500">{new Intl.DateTimeFormat('en',{month:'short',day:'numeric',year:'numeric'}).format(today)}</span></div><section className="welcome-banner relative flex min-h-72 items-center overflow-hidden rounded-3xl px-7 py-9 text-white sm:px-10"><div className="relative z-10 max-w-md"><span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] tracking-wider">YOUR NEXT CHAPTER</span><h2 className="mt-5 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">You?re in.<br/>Make this space yours.</h2><p className="mt-3 max-w-xs text-sm leading-6 text-violet-200">Every great journey starts with a simple hello. We?re glad you?re here.</p><Link to="/profile" className="mt-6 inline-flex items-center gap-5 rounded-lg bg-lime-200 px-5 py-3 text-xs font-semibold text-violet-950 hover:bg-lime-100">Explore your profile<Icon name="arrow" className="size-4"/></Link></div><div className="banner-orbit" aria-hidden="true"><div/><span>?</span><i/></div></section><section className="mt-6 grid gap-4 sm:grid-cols-3">{[['user','Your account','A space that?s all yours','Personal account'],['shield','Session status','You?re all set to explore','Logged in'],['mail','Connected email',user.email,'Account email']].map(([icon,title,detail,badge])=><article key={title} className="rounded-2xl border border-stone-200/70 bg-white p-5"><div className="mb-5 flex items-center justify-between gap-2"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-violet-50 text-violet-600"><Icon name={icon}/></span><span className="text-[10px] text-stone-400">{badge}</span></div><h3 className="text-sm font-semibold">{title}</h3><p className="mt-2 break-words text-xs text-stone-500">{detail}</p></article>)}</section><section className="mt-9"><div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-semibold tracking-tight">A good place to start</h2><span className="eyebrow text-stone-400">THE ESSENTIALS</span></div><div className="grid gap-5 md:grid-cols-[1.2fr_1fr]"><Link to="/profile" className="group flex items-center gap-5 rounded-2xl border border-stone-200/70 bg-white p-6 transition hover:border-violet-300"><span className="avatar size-14 text-xl">{user.name?.charAt(0).toUpperCase()}</span><div><h3 className="text-sm font-semibold">Meet your profile</h3><p className="mt-2 text-xs leading-5 text-stone-500">Your details, all in one place.<br/>Take a look around and get familiar.</p></div><Icon name="arrow" className="ml-auto shrink-0 text-violet-500"/></Link><div className="rounded-2xl bg-[#eeefe8] p-6"><span className="eyebrow text-stone-500">A SMALL REMINDER</span><p className="mt-3 text-lg font-medium leading-7 tracking-tight text-stone-700">A little progress, every day.<br/>That?s how great things begin.</p><p className="mt-3 text-[10px] text-stone-500">ONE STEP AT A TIME.</p></div></div></section><footer className="mt-10 flex flex-wrap justify-between gap-2 border-t border-stone-200/70 pt-5 text-[11px] text-stone-400"><span>A little more you. A little more Orbit.</span><span>Made for fresh starts <span className="text-violet-500">?</span></span></footer></>
 }
-
-export default Home

@@ -1,0 +1,31 @@
+.banner {
+    background-color: antiquewhite;
+    padding: 10px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     
+}
+
+.onshowing{
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    background-color: beige;
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+
+}
+
+
+.datas{
+    background-color: antiquewhite;
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+}

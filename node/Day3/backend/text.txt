@@ -1,0 +1,160 @@
+import { useState } from "react"
+import { Alert, Button, Text, TextInput, View } from "react-native"
+
+
+const Register = ()=>{
+
+    const[name,setName] = useState<string>("")
+    const[email,setEmail] = useState<String>("")
+    const[password,setPassword] = useState<String>("")
+    const[conpassword,setConpassword] = useState<String>("")
+    const[mobile,setMobile] = useState<Number>()
+    const[gender,setGender] = useState<String>("")
+
+    const handleData = ()=>{
+        if(!name || !email || !password || !conpassword || !mobile || !gender){
+          Alert.alert("Fill the empty field ");
+          return;
+        }
+
+         if (name[0] !== name[0].toUpperCase()) {
+    Alert.alert("Name should start with capital letter");
+    return;
+  }
+
+    }
+    
+    return(
+        <View style={{flex:1,justifyContent:"center",alignItems:"center",paddingTop:450}}>
+            <View>
+                <Text style={{color:"black"}}>Enter Your Name:</Text>
+            <TextInput placeholder="Enter Your Name" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            
+            <View >
+                <Text style={{color:"black",marginTop:40}}>Enter Your Email:</Text>
+            <TextInput placeholder="abc123@gmail.com" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            <View>
+                <Text style={{color:"black",marginTop:40}}>Enter Password:</Text>
+            <TextInput placeholder="Atleast 8 characters" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            <View>
+                <Text style={{color:"black",marginTop:40}}>Confirm Password:</Text>
+            <TextInput placeholder="Same as above Password" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            <View>
+                <Text style={{color:"black",marginTop:40}}>Enter Your Mobileno:</Text>
+            <TextInput placeholder="Mustbe 10 digit" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            <View>
+                <Text style={{color:"black",marginTop:40}}>Enter Your Gender:</Text>
+            <TextInput placeholder="Male/Female" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40,marginBottom:50}}></TextInput>
+
+            </View>
+            <View style={{height:50}}>
+                <Button title="Register" onPress={handleData}></Button>
+
+            </View>
+
+            
+
+            
+            
+        </View>
+
+    )
+}
+export default Register
+import { useState } from "react"
+import { Alert, Button, Text, TextInput, View } from "react-native"
+
+
+const Register = ()=>{
+
+    const[name,setName] = useState<string>("")
+    const[email,setEmail] = useState<String>("")
+    const[password,setPassword] = useState<String>("")
+    const[conpassword,setConpassword] = useState<String>("")
+    const[mobile,setMobile] = useState<Number>()
+    const[gender,setGender] = useState<String>("")
+
+    const handleData = ()=>{
+        if(!name || !email || !password || !conpassword || !mobile || !gender){
+          Alert.alert("Fill the empty field ");
+          return;
+        }
+
+         if (name[0] !== name[0].toUpperCase()) {
+    Alert.alert("Name should start with capital letter");
+    return;
+  }
+
+    }
+    
+    return(
+        <View style={{flex:1,justifyContent:"center",alignItems:"center",paddingTop:450}}>
+            <View>
+                <Text style={{color:"black"}}>Enter Your Name:</Text>
+            <TextInput placeholder="Enter Your Name" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            
+            <View >
+                <Text style={{color:"black",marginTop:40}}>Enter Your Email:</Text>
+            <TextInput placeholder="abc123@gmail.com" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            <View>
+                <Text style={{color:"black",marginTop:40}}>Enter Password:</Text>
+            <TextInput placeholder="Atleast 8 characters" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            <View>
+                <Text style={{color:"black",marginTop:40}}>Confirm Password:</Text>
+            <TextInput placeholder="Same as above Password" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            <View>
+                <Text style={{color:"black",marginTop:40}}>Enter Your Mobileno:</Text>
+            <TextInput placeholder="Mustbe 10 digit" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40}}></TextInput>
+
+            </View>
+            <View>
+                <Text style={{color:"black",marginTop:40}}>Enter Your Gender:</Text>
+            <TextInput placeholder="Male/Female" placeholderTextColor="white" style={{backgroundColor:"black",color:"white",width:200,height:40,marginBottom:50}}></TextInput>
+
+            </View>
+            <View style={{height:50}}>
+                <Button title="Register" onPress={handleData}></Button>
+
+            </View>
+
+            
+
+            
+            
+        </View>
+
+    )
+}
+export default Register   and 
+import { View } from "react-native"
+
+import Register from "./src/component/Register"
+
+const App = ()=>{
+  return(
+    <View>
+      <Register/>
+    </View>
+
+  )
+}
+
+export default App;

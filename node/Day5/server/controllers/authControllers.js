@@ -46,3 +46,4 @@ export const getDatas = async(req,res)=>{
     }
 
 }
+

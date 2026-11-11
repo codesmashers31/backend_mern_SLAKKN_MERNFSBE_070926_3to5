@@ -19,6 +19,9 @@ import { useEffect, useState } from "react";
 
 //   }
 
+
+
+
 //   const addData = (e)=>{
 
 //     e.preventDefault()
@@ -45,6 +48,9 @@ import { useEffect, useState } from "react";
 //    localStorage.setItem("mydatas",JSON.stringify(addArr))
 
 //    alert("Successfully Added")
+
+
+    const res = await fetch("http://localhost:5000/api/data/bodydata",{method:"POST"},saveData)
 
 //    setSaveData({name:"",email:"",age:""})    
 
